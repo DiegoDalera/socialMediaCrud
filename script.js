@@ -8,7 +8,6 @@ let posts = document.getElementById("posts");
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log("button clicked");
-  
     formValidation();
   });
   
@@ -23,7 +22,6 @@ formulario.addEventListener("submit", (e) => {
   };
 
   // Aceptar campos de entrada
-
 let data = {};
 
 let acceptData = () => {
@@ -33,10 +31,12 @@ let acceptData = () => {
 
 
   //Crear post
+  let postCount = 0;
 
   let createPost = () => {
+    postCount++;
     posts.innerHTML += `
-    <div class="posteo animate__animated animate__backInDown">
+    <div class="posteo post-${postCount}">
       <p>${data.text}</p>
       <span class="options">
         <i onClick="editPost(this)" class="fas fa-edit"></i>
@@ -45,6 +45,11 @@ let acceptData = () => {
     </div>
     `;
     input.value = "";
+
+    setTimeout(() => {
+      const newPost = document.querySelector(`.post-${postCount}`);
+      newPost.classList.add('show');
+    }, 100);
   }
 
   let deletePost = (e) => {
